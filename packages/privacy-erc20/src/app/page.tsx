@@ -1,84 +1,127 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import WalletConnect from '@/components/WalletConnect';
+import RegisterKey from '@/components/RegisterKey';
+import MintTokens from '@/components/MintTokens';
+import PrivateTransfer from '@/components/PrivateTransfer';
+import InfoPanel from '@/components/InfoPanel';
 
-const slogans = [
-  "Turn chats into apps",
-  "Prompt. Ship. Repeat.",
-  "Build anything from a chat",
-  "Ideas → Apps, instantly",
-  "From zero to MVP in minutes",
-  "Your cofounder in the command line",
-  "Draft, iterate, deploy",
-  "Ship faster than you can type",
-  "Design in text, deliver in code",
-  "Dream it. Prompt it. Run it.",
-  "Chat-native app building",
-  "From prompt to product",
-  "One prompt, infinite apps",
-  "Stop scaffolding. Start shipping.",
-  "Prototype at the speed of thought",
-  "Make conversations executable"
-];
-
-export default function Landing() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % slogans.length);
-        setIsVisible(true);
-      }, 400);
-    }, 2800);
-
-    return () => clearInterval(interval);
-  }, []);
-
+export default function Home() {
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-black text-white">
-      {/* Enhanced animated aurora background layers */}
-      <div className="absolute inset-0 bg-aurora-layer-1" />
-      <div className="absolute inset-0 bg-aurora-layer-2" />
-      <div className="absolute inset-0 bg-aurora-layer-3" />
-      
-      {/* Floating particles overlay */}
-      <div className="absolute inset-0 bg-particles" />
-      
-      {/* Main content - centered */}
-      <main className="relative z-10 h-full flex flex-col items-center justify-center px-6">
-        <h1 className="text-center text-[clamp(28px,6vw,64px)] font-medium tracking-tight mb-4">
-          Turn Chats into Apps
-        </h1>
-        
-        {/* Rotating slogans */}
-        <div className="mt-4 h-8 md:h-10 overflow-hidden flex items-center justify-center">
-          <span
-            className={`inline-block text-center text-[clamp(18px,3vw,32px)] font-light transition-all duration-[400ms] ease-in-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-            }`}
-          >
-            {slogans[currentIndex]}
-          </span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
+      {/* Header */}
+      <header className="border-b border-gray-800 bg-black/30 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Privacy Token
+            </h1>
+            <p className="text-xs text-gray-400">Ring Signatures + Zero-Knowledge Proofs</p>
+          </div>
+          <WalletConnect />
         </div>
-      </main>
-      
-      {/* Start Prompting arrow pointing left - bottom left */}
-      <div className="absolute left-6 md:left-8 bottom-[5%] z-20 flex items-center gap-3 arrow-point-left">
-        <div className="flex items-center gap-2 text-white/80 font-medium text-sm md:text-base">
-          <svg 
-            className="w-5 h-5 md:w-6 md:h-6 animate-bounce-horizontal" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          <span>Start prompting</span>
+      </header>
+
+      {/* Hero Section */}
+      <section className="container mx-auto px-6 py-12">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+            Truly Private Transactions
+          </h2>
+          <p className="text-xl text-gray-300">
+            The first ERC20 token with complete on-chain privacy using Ring Signatures and Zero-Knowledge Proofs
+          </p>
         </div>
-      </div>
+
+        {/* Info Panel */}
+        <div className="mb-12">
+          <InfoPanel />
+        </div>
+
+        {/* Main Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Step 1: Register */}
+          <div className="lg:col-span-1">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center font-bold">
+                1
+              </div>
+              <h3 className="text-lg font-semibold">Register</h3>
+            </div>
+            <RegisterKey />
+          </div>
+
+          {/* Step 2: Mint */}
+          <div className="lg:col-span-1">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center font-bold">
+                2
+              </div>
+              <h3 className="text-lg font-semibold">Mint</h3>
+            </div>
+            <MintTokens />
+          </div>
+
+          {/* Step 3: Transfer */}
+          <div className="lg:col-span-1">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold">
+                3
+              </div>
+              <h3 className="text-lg font-semibold">Transfer</h3>
+            </div>
+            <PrivateTransfer />
+          </div>
+        </div>
+
+        {/* Technical Details */}
+        <div className="mt-12 grid md:grid-cols-2 gap-6">
+          <div className="bg-gray-800/30 border border-gray-700 rounded-xl p-6">
+            <h3 className="text-xl font-bold mb-4">🔬 Technical Implementation</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li>✅ <strong>Ring Signatures:</strong> Linkable ring signatures using Poseidon hash</li>
+              <li>✅ <strong>ZK-SNARKs:</strong> Groth16 proofs for transaction validity</li>
+              <li>✅ <strong>Pedersen Commitments:</strong> Hide balances and amounts</li>
+              <li>✅ <strong>Nullifier System:</strong> Prevent double-spending</li>
+              <li>✅ <strong>EVM Compatible:</strong> Runs on any Ethereum-compatible chain</li>
+            </ul>
+          </div>
+
+          <div className="bg-gray-800/30 border border-gray-700 rounded-xl p-6">
+            <h3 className="text-xl font-bold mb-4">🛡️ Privacy Guarantees</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li>🔒 <strong>Hidden Sender:</strong> Ring signature hides who sent the transaction</li>
+              <li>🔒 <strong>Hidden Receiver:</strong> Commitment scheme hides the recipient</li>
+              <li>🔒 <strong>Hidden Amount:</strong> Zero-knowledge proofs hide transfer amounts</li>
+              <li>🔒 <strong>Hidden Balance:</strong> All balances stored as commitments</li>
+              <li>🔒 <strong>No Metadata:</strong> Minimal on-chain information</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Deployment Instructions */}
+        <div className="mt-12 bg-yellow-900/20 border border-yellow-700/50 rounded-xl p-6">
+          <h3 className="text-xl font-bold mb-4">⚠️ Deployment Required</h3>
+          <p className="text-sm text-gray-300 mb-4">
+            To use this platform, you need to deploy the PrivacyToken smart contract. Follow these steps:
+          </p>
+          <ol className="list-decimal list-inside space-y-2 text-sm text-gray-300">
+            <li>Deploy the contract from <code className="bg-black/30 px-2 py-1 rounded">contracts/PrivacyToken.sol</code></li>
+            <li>Update the contract address in <code className="bg-black/30 px-2 py-1 rounded">src/lib/constants.ts</code></li>
+            <li>Deploy a ZK verifier contract (optional for production)</li>
+            <li>Connect your wallet and start using private transactions!</li>
+          </ol>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-800 bg-black/30 backdrop-blur-sm mt-12">
+        <div className="container mx-auto px-6 py-8 text-center text-gray-400 text-sm">
+          <p>Privacy Token - Built with Ring Signatures and Zero-Knowledge Proofs on EVM</p>
+          <p className="mt-2">⚠️ Educational implementation - Audit before production use</p>
+        </div>
+      </footer>
     </div>
   );
 }
+
